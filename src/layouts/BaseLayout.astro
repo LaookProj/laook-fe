@@ -6,8 +6,8 @@ interface Props {
 }
 
 const {
-  title = 'Laook — AI-Powered Pantry Tracker & Recipe Engine',
-  description = 'Snap a photo of your ingredients and get personalized recipe recommendations instantly. Powered by Computer Vision AI.',
+  title = 'Laook — Smart Pantry Tracker & Recipe Explorer',
+  description = 'Snap a photo of your ingredients and discover personalized recipes instantly. Smart pantry tracking and recipe planning made simple.',
   ogImage = '/og-image.png',
 } = Astro.props;
 
@@ -19,6 +19,23 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://laook.beyondyou.my.id'
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Theme Initialization Script -->
+    <script is:inline>
+      const getTheme = () => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      };
+      const theme = getTheme();
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+      }
+    </script>
 
     <!-- SEO -->
     <title>{title}</title>
