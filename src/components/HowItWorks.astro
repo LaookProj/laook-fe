@@ -1,0 +1,323 @@
+---
+const steps = [
+  {
+    number: "01",
+    icon: "📱",
+    title: "Snap",
+    description: "Take a photo of your ingredients with your phone camera.",
+  },
+  {
+    number: "02",
+    icon: "🧠",
+    title: "Recognize",
+    description: "Our AI identifies every ingredient using advanced Computer Vision.",
+  },
+  {
+    number: "03",
+    icon: "🍽️",
+    title: "Cook",
+    description: "Browse personalized recipes tailored to what you have on hand.",
+  },
+];
+---
+
+<section id="how-it-works" class="section">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="hiw-header">
+      <span class="badge animate-fade-in-up">🔄 Simple Process</span>
+      <h2 class="hiw-heading animate-fade-in-up animate-delay-1">
+        Three Steps to Delicious Meals
+      </h2>
+      <p class="hiw-subtext animate-fade-in-up animate-delay-2">
+        From your kitchen to your plate in minutes.
+      </p>
+    </div>
+
+    <!-- Steps Timeline -->
+    <div class="hiw-steps">
+      {steps.map((step, i) => (
+        <div class={`hiw-step animate-fade-in-up animate-delay-${i + 2}`}>
+          <!-- Card -->
+          <div class="hiw-card">
+            <!-- Large gradient number behind icon -->
+            <div class="hiw-number-wrap">
+              <span class="hiw-number">{step.number}</span>
+              <span class="hiw-icon">{step.icon}</span>
+            </div>
+            <h3 class="hiw-title">{step.title}</h3>
+            <p class="hiw-desc">{step.description}</p>
+          </div>
+
+          <!-- Connector (hidden on last step) -->
+          {i < steps.length - 1 && (
+            <div class="hiw-connector" aria-hidden="true">
+              <div class="hiw-connector-line" />
+              <svg class="hiw-connector-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M1 1L6 6L1 11" stroke="url(#arrowGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <defs>
+                  <linearGradient id="arrowGrad" x1="1" y1="1" x2="6" y2="11">
+                    <stop stop-color="var(--color-primary)" />
+                    <stop offset="1" stop-color="var(--color-primary-light)" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ── Header ── */
+  .hiw-header {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .hiw-heading {
+    font-family: var(--font-display);
+    font-size: var(--fs-h1);
+    font-weight: 800;
+    color: var(--color-ink);
+    max-width: 580px;
+  }
+
+  .hiw-subtext {
+    font-size: var(--fs-body-lg);
+    color: var(--color-ink-secondary);
+    max-width: 460px;
+    line-height: var(--lh-relaxed);
+  }
+
+  /* ── Steps Grid ── */
+  .hiw-steps {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
+    position: relative;
+  }
+
+  .hiw-step {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    max-width: 340px;
+  }
+
+  /* ── Card ── */
+  .hiw-card {
+    position: relative;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-xl);
+    padding: var(--space-2xl) var(--space-lg) var(--space-xl);
+    text-align: center;
+    transition:
+      transform var(--duration-normal) var(--ease-out),
+      box-shadow var(--duration-normal) var(--ease-out),
+      border-color var(--duration-normal) var(--ease-out);
+    flex: 1;
+    overflow: hidden;
+    cursor: default;
+  }
+
+  .hiw-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      var(--color-primary-lighter) 0%,
+      transparent 50%
+    );
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-out);
+    pointer-events: none;
+  }
+
+  .hiw-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl), 0 0 60px rgba(255, 56, 92, 0.08);
+    border-color: var(--color-primary-light);
+  }
+
+  .hiw-card:hover::before {
+    opacity: 1;
+  }
+
+  /* ── Number + Icon ── */
+  .hiw-number-wrap {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto var(--space-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hiw-number {
+    position: absolute;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 5rem;
+    line-height: 1;
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0.12;
+    user-select: none;
+    transition: opacity var(--duration-normal) var(--ease-out);
+  }
+
+  .hiw-card:hover .hiw-number {
+    opacity: 0.22;
+  }
+
+  .hiw-icon {
+    position: relative;
+    font-size: 2.75rem;
+    line-height: 1;
+    z-index: 1;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.08));
+    transition: transform var(--duration-normal) var(--ease-out);
+  }
+
+  .hiw-card:hover .hiw-icon {
+    transform: scale(1.15);
+  }
+
+  /* ── Text ── */
+  .hiw-title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    color: var(--color-ink);
+    margin-bottom: var(--space-sm);
+    position: relative;
+  }
+
+  .hiw-desc {
+    font-size: var(--fs-body);
+    color: var(--color-ink-secondary);
+    line-height: var(--lh-relaxed);
+    max-width: 260px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* ── Connector (horizontal) ── */
+  .hiw-connector {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    width: 48px;
+    position: relative;
+    align-self: center;
+    margin-top: -24px;
+  }
+
+  .hiw-connector-line {
+    flex: 1;
+    height: 2px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--color-primary) 0,
+      var(--color-primary) 6px,
+      transparent 6px,
+      transparent 12px
+    );
+    opacity: 0.35;
+  }
+
+  .hiw-connector-arrow {
+    flex-shrink: 0;
+    opacity: 0.45;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .hiw-steps {
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .hiw-step {
+      flex-direction: column;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .hiw-card {
+      width: 100%;
+    }
+
+    .hiw-connector {
+      width: 2px;
+      height: 40px;
+      flex-direction: column;
+      margin-top: 0;
+    }
+
+    .hiw-connector-line {
+      width: 2px;
+      height: 100%;
+      background: repeating-linear-gradient(
+        180deg,
+        var(--color-primary) 0,
+        var(--color-primary) 6px,
+        transparent 6px,
+        transparent 12px
+      );
+    }
+
+    .hiw-connector-arrow {
+      transform: rotate(90deg);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hiw-header {
+      margin-bottom: var(--space-2xl);
+    }
+  }
+</style>
+
+<script>
+  // Intersection Observer for entrance animations
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+  );
+
+  document.querySelectorAll("#how-it-works .animate-fade-in-up").forEach((el) => {
+    el.style.opacity = "0";
+    observer.observe(el);
+  });
+
+  // Re-apply animation when element becomes visible
+  const style = document.createElement("style");
+  style.textContent = `
+    #how-it-works .animate-fade-in-up.is-visible {
+      animation: fadeInUp 0.6s var(--ease-out) both;
+    }
+  `;
+  document.head.appendChild(style);
+</script>

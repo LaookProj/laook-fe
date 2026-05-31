@@ -1,0 +1,221 @@
+---
+const techItems = [
+  {
+    icon: "🤖",
+    title: "Computer Vision",
+    description: "Custom ML models for ingredient recognition",
+    accent: "#FF385C",
+  },
+  {
+    icon: "🔥",
+    title: "Firebase",
+    description: "Secure authentication & real-time database",
+    accent: "#FFA611",
+  },
+  {
+    icon: "📱",
+    title: "Flutter",
+    description: "Beautiful cross-platform mobile experience",
+    accent: "#027DFD",
+  },
+  {
+    icon: "☁️",
+    title: "Cloud Functions",
+    description: "Scalable serverless backend",
+    accent: "#4285F4",
+  },
+  {
+    icon: "🧪",
+    title: "TensorFlow",
+    description: "Deep learning for recipe intelligence",
+    accent: "#FF6F00",
+  },
+  {
+    icon: "🌐",
+    title: "Open Source",
+    description: "Community-driven development",
+    accent: "#34A853",
+  },
+];
+---
+
+<section id="tech" class="section section--alt">
+  <div class="container">
+    <div class="tech-header animate-fade-in-up">
+      <span class="badge">🛡️ Built Different</span>
+      <h2 class="tech-heading">Powered by Cutting-Edge Technology</h2>
+      <p class="tech-subtext">
+        We use the latest in AI, mobile development, and cloud infrastructure.
+      </p>
+    </div>
+
+    <div class="tech-grid">
+      {techItems.map((item, index) => (
+        <article
+          class={`tech-card animate-fade-in-up animate-delay-${index + 1}`}
+          style={`--card-accent: ${item.accent};`}
+        >
+          <div class="tech-card__glow" />
+          <div class="tech-card__icon-wrap">
+            <span class="tech-card__icon">{item.icon}</span>
+          </div>
+          <h3 class="tech-card__title">{item.title}</h3>
+          <p class="tech-card__desc">{item.description}</p>
+          <div class="tech-card__line" />
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ── Section Header ── */
+  .tech-header {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+  }
+
+  .tech-heading {
+    font-size: var(--fs-h1);
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .tech-subtext {
+    font-size: var(--fs-body-lg);
+    color: var(--color-ink-secondary);
+    line-height: var(--lh-relaxed);
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  /* ── Grid ── */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+  }
+
+  /* ── Card ── */
+  .tech-card {
+    position: relative;
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl) var(--space-lg);
+    text-align: center;
+    overflow: hidden;
+    cursor: default;
+    transition:
+      transform var(--duration-normal) var(--ease-out),
+      box-shadow var(--duration-normal) var(--ease-out);
+
+    /* Gradient border via outline trick */
+    border: 1.5px solid var(--color-border-light);
+  }
+
+  .tech-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: var(--shadow-xl), 0 0 0 1.5px var(--card-accent, var(--color-primary));
+    border-color: transparent;
+  }
+
+  /* Subtle top-accent line */
+  .tech-card__line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--card-accent) 50%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-out);
+  }
+
+  .tech-card:hover .tech-card__line {
+    opacity: 1;
+  }
+
+  /* Ambient glow on hover */
+  .tech-card__glow {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      circle at 50% 0%,
+      color-mix(in srgb, var(--card-accent) 8%, transparent) 0%,
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity var(--duration-slow) var(--ease-out);
+    pointer-events: none;
+  }
+
+  .tech-card:hover .tech-card__glow {
+    opacity: 1;
+  }
+
+  /* Icon */
+  .tech-card__icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--card-accent) 10%, var(--color-surface)) 0%,
+      color-mix(in srgb, var(--card-accent) 4%, var(--color-surface)) 100%
+    );
+    margin-bottom: var(--space-md);
+    transition: transform var(--duration-normal) var(--ease-out);
+  }
+
+  .tech-card:hover .tech-card__icon-wrap {
+    transform: scale(1.1) rotate(-3deg);
+  }
+
+  .tech-card__icon {
+    font-size: 1.75rem;
+    line-height: 1;
+  }
+
+  .tech-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    color: var(--color-ink);
+    margin-bottom: var(--space-sm);
+  }
+
+  .tech-card__desc {
+    font-size: var(--fs-caption);
+    color: var(--color-ink-secondary);
+    line-height: var(--lh-relaxed);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .tech-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .tech-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+
+    .tech-card {
+      padding: var(--space-lg) var(--space-md);
+    }
+  }
+</style>

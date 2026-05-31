@@ -1,0 +1,342 @@
+---
+import { Image } from 'astro:assets';
+import featureRecipes from '../assets/images/feature-recipes.png';
+
+const features = [
+  {
+    icon: '📸',
+    title: 'Smart Scan',
+    description:
+      'Point your camera at any ingredient — our AI identifies it instantly with advanced Computer Vision.',
+    gradient: 'linear-gradient(135deg, #FF385C 0%, #FF6B6B 100%)',
+  },
+  {
+    icon: '🍳',
+    title: 'Recipe Magic',
+    description:
+      'Get personalized recipe suggestions based on what you have. No more wondering what to cook.',
+    gradient: 'linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%)',
+  },
+  {
+    icon: '📖',
+    title: 'Step-by-Step Guides',
+    description:
+      'Follow clear, detailed cooking instructions with images. Perfect for beginners and pros alike.',
+    gradient: 'linear-gradient(135deg, #10B981 0%, #34D399 100%)',
+  },
+  {
+    icon: '🌍',
+    title: 'Cross-Platform',
+    description:
+      'Available on Android with Flutter cross-platform support coming soon. Cook anywhere, anytime.',
+    gradient: 'linear-gradient(135deg, #6366F1 0%, #818CF8 100%)',
+  },
+];
+---
+
+<section id="features" class="section section--alt">
+  <!-- Decorative background orbs -->
+  <div class="features__orb features__orb--1" aria-hidden="true"></div>
+  <div class="features__orb features__orb--2" aria-hidden="true"></div>
+
+  <div class="container">
+    <!-- Section Header -->
+    <div class="features__header animate-fade-in-up">
+      <span class="badge">✨ Core Features</span>
+      <h2 class="features__title">Everything You Need to Cook Smarter</h2>
+      <p class="features__subtitle">
+        From ingredient recognition to personalized recipes, Laook handles it all.
+      </p>
+    </div>
+
+    <!-- Feature Cards Grid -->
+    <div class="features__grid">
+      {features.map((feature, i) => (
+        <article
+          class={`features__card animate-fade-in-up animate-delay-${i + 1}`}
+        >
+          <div class="features__icon-wrap" style={`--card-gradient: ${feature.gradient}`}>
+            <span class="features__icon">{feature.icon}</span>
+          </div>
+          <h3 class="features__card-title">{feature.title}</h3>
+          <p class="features__card-desc">{feature.description}</p>
+          <div class="features__card-shine" aria-hidden="true"></div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Image Showcase -->
+    <div class="features__showcase animate-fade-in-up animate-delay-5">
+      <div class="features__showcase-inner">
+        <div class="features__showcase-glow" aria-hidden="true"></div>
+        <Image
+          src={featureRecipes}
+          alt="Laook recipe suggestions powered by AI"
+          class="features__showcase-img"
+          widths={[400, 600, 800]}
+          sizes="(max-width: 768px) 90vw, 700px"
+          loading="lazy"
+        />
+      </div>
+      <p class="features__showcase-caption">
+        <span class="features__showcase-badge">🚀 Powered by AI</span>
+        Discover recipes tailored to the ingredients already in your pantry.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* -----------------------------------------------
+     Section chrome
+     ----------------------------------------------- */
+  #features {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Decorative gradient orbs */
+  .features__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.18;
+    pointer-events: none;
+  }
+
+  .features__orb--1 {
+    width: 420px;
+    height: 420px;
+    background: var(--color-primary);
+    top: -120px;
+    right: -100px;
+  }
+
+  .features__orb--2 {
+    width: 340px;
+    height: 340px;
+    background: #6366F1;
+    bottom: -80px;
+    left: -80px;
+  }
+
+  /* -----------------------------------------------
+     Header
+     ----------------------------------------------- */
+  .features__header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto var(--space-3xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .features__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h1);
+    font-weight: 800;
+    color: var(--color-ink);
+    line-height: var(--lh-tight);
+  }
+
+  .features__subtitle {
+    font-size: var(--fs-body-lg);
+    color: var(--color-ink-secondary);
+    line-height: var(--lh-relaxed);
+    max-width: 520px;
+  }
+
+  /* -----------------------------------------------
+     Cards Grid
+     ----------------------------------------------- */
+  .features__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+
+  /* -----------------------------------------------
+     Individual Card — Glassmorphism
+     ----------------------------------------------- */
+  .features__card {
+    position: relative;
+    padding: var(--space-xl) var(--space-lg);
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition:
+      transform var(--duration-normal) var(--ease-out),
+      box-shadow var(--duration-normal) var(--ease-out),
+      border-color var(--duration-normal) var(--ease-out);
+    box-shadow: var(--shadow-sm);
+    cursor: default;
+  }
+
+  .features__card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-xl);
+    border-color: rgba(255, 56, 92, 0.18);
+  }
+
+  /* Shine sweep on hover */
+  .features__card-shine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(255, 255, 255, 0.45) 50%,
+      transparent 60%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s var(--ease-out);
+    pointer-events: none;
+  }
+
+  .features__card:hover .features__card-shine {
+    transform: translateX(100%);
+  }
+
+  /* Icon container */
+  .features__icon-wrap {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    background: var(--card-gradient);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    margin-bottom: var(--space-md);
+    position: relative;
+  }
+
+  .features__icon-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: rgba(255, 255, 255, 0.2);
+    pointer-events: none;
+  }
+
+  .features__icon {
+    font-size: 1.5rem;
+    line-height: 1;
+    filter: grayscale(0);
+  }
+
+  /* Card text */
+  .features__card-title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    color: var(--color-ink);
+    margin-bottom: var(--space-sm);
+  }
+
+  .features__card-desc {
+    font-size: var(--fs-body);
+    color: var(--color-ink-secondary);
+    line-height: var(--lh-relaxed);
+  }
+
+  /* -----------------------------------------------
+     Image Showcase
+     ----------------------------------------------- */
+  .features__showcase {
+    margin-top: var(--space-3xl);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  .features__showcase-inner {
+    position: relative;
+    display: inline-block;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    max-width: 700px;
+    width: 100%;
+  }
+
+  .features__showcase-glow {
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: var(--gradient-hero);
+    opacity: 0;
+    transition: opacity var(--duration-slow) var(--ease-out);
+    z-index: -1;
+    filter: blur(16px);
+  }
+
+  .features__showcase-inner:hover .features__showcase-glow {
+    opacity: 0.35;
+  }
+
+  .features__showcase-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-xl);
+    transition: transform var(--duration-slow) var(--ease-out);
+  }
+
+  .features__showcase-inner:hover .features__showcase-img {
+    transform: scale(1.02);
+  }
+
+  .features__showcase-caption {
+    font-size: var(--fs-caption);
+    color: var(--color-ink-secondary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .features__showcase-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 2px var(--space-sm);
+    font-size: var(--fs-small);
+    font-weight: 600;
+    border-radius: var(--radius-pill);
+    background: var(--color-primary-lighter);
+    color: var(--color-primary);
+  }
+
+  /* -----------------------------------------------
+     Responsive
+     ----------------------------------------------- */
+  @media (max-width: 768px) {
+    .features__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+
+    .features__card {
+      padding: var(--space-lg) var(--space-md);
+    }
+
+    .features__header {
+      margin-bottom: var(--space-2xl);
+    }
+
+    .features__showcase {
+      margin-top: var(--space-2xl);
+    }
+  }
+</style>
